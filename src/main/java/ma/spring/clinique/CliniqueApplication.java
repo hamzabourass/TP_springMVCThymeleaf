@@ -16,6 +16,11 @@ public class CliniqueApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CliniqueApplication.class, args);
 	}
+	/**
+	 * @param patientRepository
+	 * @return
+	 
+	
 	@Bean
 	CommandLineRunner start(PatientRepository patientRepository) {
 		
@@ -133,6 +138,6 @@ public class CliniqueApplication {
 
 			
 		};
-	}
+	}*/
 
 }
