@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import ma.spring.clinique.entities.Patient;
 import ma.spring.clinique.repository.PatientRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class CliniqueApplication {
@@ -16,103 +18,102 @@ public class CliniqueApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CliniqueApplication.class, args);
 	}
-	/**
-	 * @param patientRepository
-	 * @return
+
 	 
 	
 	@Bean
 	CommandLineRunner start(PatientRepository patientRepository) {
 		
 		return args -> {
+			/*
 			Patient patient1 = Patient.builder()
 					.name("Hamza")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient2 = Patient.builder()
 					.name("Youssef")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient3 = Patient.builder()
 					.name("oussama")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient4 = Patient.builder()
 					.name("ayoub")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient5 = Patient.builder()
-					.name("ali")
+					.name("alibambo")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient6 = Patient.builder()
 					.name("Hamza")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient7 = Patient.builder()
 					.name("Youssef")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient8 = Patient.builder()
 					.name("oussama")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient9 = Patient.builder()
 					.name("ayoub")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient10 = Patient.builder()
-					.name("ali")
+					.name("alibamboma")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient11 = Patient.builder()
 					.name("Hamza")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient12 = Patient.builder()
 					.name("Youssef")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient13 = Patient.builder()
 					.name("oussama")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient14 = Patient.builder()
 					.name("ayoub")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			Patient patient15 = Patient.builder()
-					.name("ali")
+					.name("alibaba")
 					.birthDate(new Date())
-					.score(10)
+					.score(100)
 					.malade(false)
 					.build();
 			patientRepository.save(patient1);
@@ -130,14 +131,19 @@ public class CliniqueApplication {
 			patientRepository.save(patient13);
 			patientRepository.save(patient14);
 			patientRepository.save(patient15);
-			
+
 
 			patientRepository.findAll().forEach(p ->{
 				System.out.println(p.toString());
-			});
+			});*/
 
-			
+
 		};
-	}*/
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 
 }
