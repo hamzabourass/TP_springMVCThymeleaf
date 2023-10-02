@@ -1,27 +1,41 @@
 package ma.spring.clinique.security;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import ma.spring.clinique.security.service.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Bean
+    private PasswordEncoder passwordEncoder;
+    private UserDetailServiceImpl userDetailService;
+
+
+
+    //@Bean
+    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
+
+        return new JdbcUserDetailsManager(dataSource);
+    }
+
+
+
+    //@Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
 
         return new InMemoryUserDetailsManager(
@@ -34,7 +48,7 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login").permitAll();
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll();
         http.rememberMe();
         http.authorizeHttpRequests().requestMatchers("/webjars/**").permitAll();
 
@@ -43,6 +57,7 @@ public class SecurityConfig {
         http.exceptionHandling().accessDeniedPage("/notAuthorized");
 
         http.authorizeHttpRequests().anyRequest().authenticated();
+        http.userDetailsService(userDetailService);
         return http.build();
     }
 
